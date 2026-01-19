@@ -53,6 +53,7 @@ public class CFTest {
         Map<String,Long> frequency = names.stream().
                 collect(Collectors.groupingBy(s-> s,Collectors.counting()));
         System.out.println(frequency);
+        System.out.println("Ok");
 
         Map<String,List<Integer>>  groupMap = nums.stream().collect(Collectors.groupingBy(n-> n%2==0? "Even" : "Odd"));
         System.out.println(groupMap);
