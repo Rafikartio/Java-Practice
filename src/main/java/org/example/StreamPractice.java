@@ -1,9 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 class Employee{
@@ -61,6 +58,12 @@ class Employee{
     }
 }
 public class StreamPractice {
+
+   static boolean isAnagram(String str1, String str2){
+        return  str1.length() == str2.length() &&
+                Arrays.equals(str1.toLowerCase().chars().sorted().toArray(),
+                        str2.toLowerCase().chars().sorted().toArray());
+    }
     public static void main(String[] args) {
 
         List<Employee> employees = new ArrayList<>();
@@ -74,8 +77,17 @@ public class StreamPractice {
         employees.forEach(System.out::println);
 
 
+        List<String> words = Arrays.asList("Java","Python","Java","Python","DSA","DBMS","JS","CSS");
+       String secondFrequentNum = words.stream().collect(Collectors.groupingBy(s-> s, LinkedHashMap::new,Collectors.counting()))
+                .entrySet().stream()
+                .sorted(Map.Entry.<String,Long>comparingByValue().reversed())
+                .skip(1)
+                .map(Map.Entry::getKey)
+                .findFirst().orElse(null);
 
+        System.out.println(secondFrequentNum);
 
+        System.out.println(isAnagram("Rafi","Afri"));
 
 
     }
